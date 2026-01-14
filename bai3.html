@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <input type="text" name="dolphins-scores-1" id="dolphins-scores-1" placeholder="Dolphins scores 1:"> <br>
+     
+    <input type="text" name="dolphins-scores-2" id="dolphins-scores-2" placeholder="Dolphins scores 2:"> <br>
+     
+    <input type="text" name="dolphins-scores-3" id="dolphins-scores-3" placeholder="Dolphins scores 3:"> <br>
+    
+    <input type="text" name="koalas-scores-1" id="koalas-scores-1" placeholder="Koalas scores 1:"> <br>
+    
+    <input type="text" name="koalas-scores-2" id="koalas-scores-2" placeholder="Koalas scores 2: "> <br>
+    
+    <input type="text" name="koalas-scores-3" id="koalas-scores-3" placeholder="Koalas scores 3: "> <br>
+
+    <button id="btn-calculate">Find the winner</button> <br>
+
+    
+    <input type="text" name="" id="cmt" disabled placeholder="Comment:">
+
+    <script>
+        var btnCal = document.getElementById('btn-calculate')
+
+        btnCal.onclick = () => {
+            var ds1 = document.getElementById("dolphins-scores-1").value
+            var ds2 = document.getElementById("dolphins-scores-2").value
+            var ds3 = document.getElementById("dolphins-scores-3").value
+
+            var ks1 = document.getElementById("koalas-scores-1").value
+            var ks2 = document.getElementById("koalas-scores-2").value
+            var ks3 = document.getElementById("koalas-scores-3").value
+
+            var cmt = document.getElementById("cmt")
+
+            var avgd = parseInt((ds1 + ds2 + ds3) / 3)
+            var avgk = parseInt((ks1 + ks2 + ks3) / 3)
+
+            if(avgd > avgk){
+                cmt.value = ``
+            }else if ( avgd < avgk){
+
+            }else{
+
+            }
+        }
+    </script>
+</body>
+</html>

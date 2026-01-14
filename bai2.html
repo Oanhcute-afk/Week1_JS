@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            margin : 0;
+            justify-content: center;
+            align-items: center;
+            display: flex;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <input type="text" name="" id="MW" placeholder="Mark weight">
+    <br>
+    <br>
+    <input type="text" name="" id="MH" placeholder="Mark height">
+    <br>
+    <br>
+    <input type="text" name="" id="JW" placeholder="John weight">
+    <br>
+    <br>
+    <input type="text" name="" id="JH" placeholder="John  height">
+    <br>
+    <br>
+    <input type="text" name="" id="MBMI" disabled placeholder="Mark BMI">
+    <br>
+    <br>
+    <input type="text" name="" id="JBMI" disabled placeholder="John BMI">
+    <br>
+    <br>
+    <button id="Caculate" onclick="">Caculate</button>
+    <br>
+    <br>
+    <input type="text" name="" id="higher" disabled placeholder="Result">
+    </div>
+    <script>
+        var btnCal = document.getElementById("Caculate");
+
+        btnCal.onclick = () =>{
+            var MH = document.getElementById("MH").value
+            var MW = document.getElementById("MW").value
+            var JH = document.getElementById("JH").value
+            var JW = document.getElementById("JW").value
+
+            var MBMI = document.getElementById("MBMI")
+            var JBMI = document.getElementById("JBMI")
+            var Result = document.getElementById("higher")
+
+            var calMBMI = parseFloat(MW / Math.pow(MH,2));
+            var calJBMI = parseFloat(JW / Math.pow(JH,2));
+
+            MBMI.value = calMBMI
+            JBMI.value = calJBMI
+
+            if(calMBMI > calJBMI){
+                Result.value = `Mark higher John!`
+            }else if(calMBMI < calJBMI){
+                Result.innerHTML = `Mark lower John!`
+            }else{
+                Result.value = `Mark = John`
+            }
+
+
+        }
+        
+        
+
+    </script>
+</body>
+</html>
