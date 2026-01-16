@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const John = {
+            fullname: "John Smith",
+            weight: 92,
+            height: 1.95,
+            calcBMI: function() {
+                this.bmi = this.weight / (Math.pow(this.height,2));
+                return this.bmi;
+            }
+        };
+
+        const Mark = {
+            fullname: "Mark Miller",
+            weight: 78,
+            height: 1.69,
+            calcBMI: function () {
+                this.bmi = this.weight / (Math.pow(this.height,2));
+                return this.bmi;
+              }
+        };
+
+        John.calcBMI();
+        Mark.calcBMI();
+
+        if(Mark.bmi > John.bmi){
+            console.log(`${Mark.fullname} BMI (${Mark.bmi.toFixed(1)}) is higher than ${John.fullname} BMI (${John.bmi.toFixed(1)})!` );
+        }
+        else if (Mark.bmi < John.bmi){
+            console.log(`${John.fullname} BMI (${John.bmi.toFixed(1)}) is higher than ${Mark.fullname} BMI (${Mark.bmi.toFixed(1)})!` );
+
+        }else{
+            console.log(`Same BMI!!`)
+        }
+    </script>
+</body>
+</html>

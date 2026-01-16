@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Document</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #222;
+      color: #eee;
+      text-align: center;
+    }
+
+    .number {
+      font-size: 3rem;
+      width: 15rem;
+      padding: 1rem;
+      margin: 1rem auto;
+      background: #eee;
+      color: #222;
+    }
+
+    .guess {
+      width: 100px;
+      font-size: 1.5rem;
+      text-align: center;
+    }
+
+    button {
+      padding: 10px 20px;
+      margin: 10px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Guess My Number!</h1>
+  <p class="message">Start guessing...</p>
+
+  <div class="number">?</div>
+
+  <input type="number" class="guess" />
+  <br />
+
+  <button class="check">Check!</button>
+  <button class="again">Again!</button>
+
+  <p>Score: <span class="score">20</span></p>
+
+  <script>
+    let secretNumber = Math.trunc(Math.random() * 20) + 1;
+    let score = 20;
+
+    document.querySelector('.again').addEventListener('click', function () {
+      score = 20;
+      secretNumber = Math.trunc(Math.random() * 20) + 1;
+
+      document.querySelector('.message').textContent = 'Start guessing...';
+      document.querySelector('.score').textContent = score;
+      document.querySelector('.number').textContent = '?';
+      document.querySelector('.guess').value = '';
+
+      document.body.style.backgroundColor = '#222';
+      document.querySelector('.number').style.width = '15rem';
+    });
+  </script>
+
+</body>
+</html>

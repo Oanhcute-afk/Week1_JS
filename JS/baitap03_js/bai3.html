@@ -4,25 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+
+   <style>
+     body {
+            margin : 0;
+            justify-content: center;
+            align-items: center;
+            display: flex;
+        }
+   </style>
 </head>
 <body>
     
+    <div class="container">
     <input type="text" name="dolphins-scores-1" id="dolphins-scores-1" placeholder="Dolphins scores 1:"> <br>
-     
+     <br>
     <input type="text" name="dolphins-scores-2" id="dolphins-scores-2" placeholder="Dolphins scores 2:"> <br>
-     
+      <br>
     <input type="text" name="dolphins-scores-3" id="dolphins-scores-3" placeholder="Dolphins scores 3:"> <br>
-    
+     <br>
     <input type="text" name="koalas-scores-1" id="koalas-scores-1" placeholder="Koalas scores 1:"> <br>
-    
+     <br>
     <input type="text" name="koalas-scores-2" id="koalas-scores-2" placeholder="Koalas scores 2: "> <br>
-    
+     <br>
     <input type="text" name="koalas-scores-3" id="koalas-scores-3" placeholder="Koalas scores 3: "> <br>
-
+    <br>
     <button id="btn-calculate">Find the winner</button> <br>
 
-    
+     <br>
     <input type="text" name="" id="cmt" disabled placeholder="Comment:">
+    </div>
 
     <script>
         var btnCal = document.getElementById('btn-calculate')
@@ -41,12 +52,15 @@
             var avgd = parseInt((ds1 + ds2 + ds3) / 3)
             var avgk = parseInt((ks1 + ks2 + ks3) / 3)
 
-            if(avgd > avgk){
-                cmt.value = ``
-            }else if ( avgd < avgk){
-
+            if(avgd < 100 && avgk <100){
+                cmt.value = `No team win`;
+                return;
+            }else if ( avgd > avgk){
+                cmt.value = `Dolphins team win the trophy!`
+            }else if (avgd < avgk){
+                cmt.value = `Koalas team win the trophy!`
             }else{
-
+                cmt.value = `Have same score!!!`
             }
         }
     </script>
