@@ -6,6 +6,154 @@
     <title>Document</title>
 </head>
 <body>
+
+    <script>
+            const game = {
+        team1: 'Bayern Munich',
+        team2: 'Borussia Dortmund',
+
+        // players là mảng gồm 2 mảng con
+        // mảng 0: đội Bayern
+        // mảng 1: đội Dortmund
+        players: [
+            [
+                'Neuer','Pavard','Martinez','Alaba','Davies',
+                'Kimmich','Goretzka','Coman','Muller','Gnabry','Lewandowski',
+            ],
+            [
+                'Burki','Schulz','Hummels','Akanji','Hakimi',
+                'Weigl','Witsel','Hazard','Brandt','Sancho','Gotze',
+            ],
+        ],
+
+        score: '4:0',
+
+        // Danh sách cầu thủ ghi bàn (có thể trùng tên)
+        scored: ['Lewandowski', 'Gnabry', 'Lewandowski', 'Hummels'],
+
+        date: 'Nov 9th, 2037',
+
+        // Tỷ lệ cược
+        odds: {
+            team1: 1.33,
+            x: 3.25,     // hòa draw
+            team2: 6.5,
+        },
+    };
+
+    // Lấy đội 1 (Bayern)
+    const players1 = game.players[0];
+
+    // Lấy đội 2 (Dortmund)
+    const players2 = game.players[1];
+
+    // gk: thủ môn (phần tử đầu)
+    // fieldPlayers: 10 cầu thủ còn lại
+    const [gk, ...fieldPlayers] = players1;
+
+
+    const allPlayers = [...players1, ...players2];
+
+
+    // Tạo mảng mới, khong thay đổi mảng gốc
+    const players1Final = [
+        ...players1,
+        'Thiago',
+        'Coutinho',
+        'Perisic'
+    ];
+
+    // x đổi tên thành draw
+    const { team1, x: draw, team2 } = game.odds;
+
+    // rest parameter: nhận bao nhiêu đối số cũng được => giai được bt trên lớp bữa thầy bảo
+    function printGoals(...players) {
+        console.log('Players who scored:');
+
+        // duyệt từng cầu thủ
+        for (const player of players) {
+            console.log(player);
+        }
+
+        // tổng số bàn = số tên truyền vào
+        console.log(`Total goals: ${players.length}`);
+    }
+
+    // Test dữ liệu thủ công
+    printGoals('Davies', 'Muller', 'Lewandowski', 'Kimmich');
+
+    // Spread array thành nhiều tham số
+    printGoals(...game.scored);
+
+    team1 < team2 && console.log(`${game.team1} is more likely to win`);
+    team2 < team1 && console.log(`${game.team2} is more likely to win`);
+
+    // entries() → lấy index + value
+    for (const [i, player] of game.scored.entries()) {
+        console.log(`Goal ${i + 1}: ${player}`);
+    }
+
+
+    let sum = 0;
+
+    // Lấy giá trị odds thành mảng
+    const odds = Object.values(game.odds);
+
+    for (const odd of odds) {
+        sum += odd;
+    }
+
+    console.log('Average odd:', sum / odds.length);
+
+    for (const [key, odd] of Object.entries(game.odds)) {
+
+        // Nếu key là x → hòa
+        // Ngược lại → chiến thắng của đội
+        const teamStr =
+            key === 'x'
+                ? 'draw'
+                : `victory ${game[key]}`;
+
+        console.log(`Odd of ${teamStr}: ${odd}`);
+    }
+
+    const scorers = {};
+
+    for (const player of game.scored) {
+        // Nếu cầu thủ đã tồn tại → +1
+        // Chưa có → gán = 1
+        scorers[player]
+            ? scorers[player]++
+            : (scorers[player] = 1);
+    }
+
+    console.log(scorers);
+
+    const gameEvents = new Map([
+        [17, '⚽ GOAL'],
+        [36, '🔁 Substitution'],
+        [47, '⚽ GOAL'],
+        [61, '🔁 Substitution'],
+        [64, '🟨 Yellow card'],
+        [69, '🟥 Red card'],
+        [70, '🔁 Substitution'],
+        [72, '🔁 Substitution'],
+        [76, '⚽ GOAL'],
+        [80, '⚽ GOAL'],
+        [92, '🟨 Yellow card'],
+    ]);
+    const events = [...new Set(gameEvents.values())];
+    console.log(events);
+    gameEvents.delete(64);
+
+    console.log(`An event happened, on average ${90/ gameEvents.size} minutes`)
+
+    for (const [minute, event] of gameEvents) {
+        const half = minute <= 45 ? 'FIRST HALF' : 'SECOND HALF';
+        console.log(`[${half}] ${minute}: ${event}`);
+    }
+
+    </script>
     
 </body>
 </html>

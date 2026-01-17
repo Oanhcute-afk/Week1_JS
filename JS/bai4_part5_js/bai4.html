@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+   <div class="container">
+    <h2>underscore ➜ camelCase</h2>
+
+    <textarea placeholder="underscore_case first_name Some_Variable calculate_AGE delayed_departure"></textarea>
+
+    <button>Convert</button>
+
+    <textarea id="result" disabled> </textarea>
+  </div>
+
+  <script>
+    const btn = document.querySelector('button');
+    const textarea = document.querySelector('textarea');
+    const result = document.getElementById('result');
+    btn.addEventListener('click', function () {
+      const rows = textarea.value.split('\n');
+
+      for (const [index, row] of rows.entries()) {
+        const lower = row.toLowerCase().trim();
+        if (!lower) continue;
+
+        const [first, second] = lower.split('_');
+        const camelCase =
+          first + second.replace(second[0], second[0].toUpperCase());
+
+        result.value = `${camelCase.padEnd(20)} ${'✅'.repeat(index + 1)}`
+      }
+    });
+  </script>
+</body>
+</html>
