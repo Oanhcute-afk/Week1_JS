@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const dogsJulia = [3, 5, 2, 12, 7];
+        const dogsKate = [4, 1, 15, 8, 3];
+        function checkDogs(dogsJulia, dogsKate){
+            const dogsJuliaCorrected = dogsJulia.slice(1,-2)
+            const allDogs = dogsJuliaCorrected.concat(dogsKate)
+
+            allDogs.forEach((age, index)=>{
+                if(age>= 3){
+                    console.log(`Dog number ${index} is an aldults, and is ${age} years old`);
+                    
+                }else{
+                    console.log(`Dog number ${index} still an puppy`);
+                    
+                }
+            });
+        }
+
+        function calcAvergaHumanAge(ages){
+            const humanAge = ages.map(age => age <= 2? age*2 : 16 + age *4);
+
+            const adults = humanAge.filter (age => age >= 18);
+
+            const avg = adults.reduce((sum,age) => sum + age, 0) / adults.length;
+
+            return avg;
+        }
+
+        checkDogs(dogsJulia,dogsKate);
+        console.log("-------------");
+        console.log(calcAvergaHumanAge(dogsJulia));
+        
+    </script>
+</body>
+</html>
