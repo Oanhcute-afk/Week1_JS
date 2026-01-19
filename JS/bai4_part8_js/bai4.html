@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const Car = function (make, speed) {
+            this.make = make;
+            this.speed = speed;
+        };
+        const bmw = new Car('BMW', 120);
+        const mercedes = new Car('Mercedes', 95);
+
+        
+
+        Car.prototype.accelerate = function () {
+            this.speed += 10;
+            console.log(`${this.make} is going at ${this.speed} km/h`);
+        };
+
+        //Prototype là nơi chứa các method (hàm) dùng chung cho nhiều object
+        Car.prototype.brake = function () {
+            this.speed -= 5;
+            console.log(`${this.make} is going at ${this.speed} km/h`);
+        };
+
+        class CarCl {
+        constructor(make, speed) {
+            this.make = make;
+            this.speed = speed;
+        }
+          accelerate() {
+            this.speed += 10;
+            console.log(`${this.make} is going at ${this.speed} km/h`);
+            return this;
+        }
+            brake() {
+            this.speed -= 5;
+            
+            console.log(`${this.make} is going at ${this.speed} km/h`);
+                return this
+        }
+            get speedUS() {
+            return this.speed / 1.6;
+        }
+          set speedUS(speed) {
+         this.speed = this.speed * 1.6;
+        }
+    }
+    class EVCl extends CarCl {
+        #charge; // private field
+
+        constructor(make, speed, charge) {
+            super(make, speed);
+            this.#charge = charge;
+        }
+        chargeBattery(chargeTo) {
+            this.#charge = chargeTo;
+            return this; // chaining
+        }
+        accelerate() {
+            this.speed += 20;
+            this.#charge--;
+            console.log(`${this.make} going at ${this.speed} km/h, with a charge of ${this.#charge}%`);
+            return this; 
+         }
+}
+const rivian = new EVCl("Rivian", 120, 23);
+
+rivian
+  .accelerate()
+  .accelerate()
+  .brake()
+  .chargeBattery(90)
+  .accelerate();
+
+    const EV = function(make, speed, charge){
+            Car.call(this, make,speed); //ke thua Car
+            this.charge = charge;
+        }
+
+        EV.prototype = Object.create(Car.prototype); // nhan cac ham cha
+
+        EV.prototype.chargeBattery = function (chargeTo){
+            this.charge = chargeTo
+        }
+        EV.prototype.accelerate = function () {
+            this.speed += 20;
+            this.charge -= 1;
+            console.log(`${this.make} going at ${this.speed} km/h, with a charge of ${this.charge}%`);
+        };
+
+    const ford = new CarCl("Ford", 120);
+
+    ford.accelerate();
+    ford.brake();      
+
+    console.log(ford.speedUS); 
+
+    ford.speedUS = 50;
+    console.log(ford.speed); 
+
+
+    mercedes.accelerate();
+    bmw.accelerate();
+    mercedes.brake();
+      const tesla = new EV("Tesla", 120, 23);
+
+      tesla.accelerate();     
+        tesla.brake();         
+        tesla.chargeBattery(90);
+        tesla.accelerate();    
+
+    </script>
+</body>
+</html>

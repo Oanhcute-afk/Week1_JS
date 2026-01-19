@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const whereAmI = function (lat, lng) {
+  fetch(`https://geocode.xyz/${lat},${lng}?geoit=json`)
+    .then(response => {
+      // ⚠️ fetch KHÔNG reject khi lỗi 403
+      if (!response.ok)
+        throw new Error(`Geocoding failed (${response.status})`);
+      return response.json();
+    })
+    .then(data => {
+      console.log(data);
+
+      console.log(`You are in ${data.city}, ${data.country}`);
+
+      // gọi API quốc gia
+      return fetch(`https://restcountries.com/v3.1/name/${data.country}`);
+    })
+    .then(response => {
+      if (!response.ok)
+        throw new Error('Country not found');
+      return response.json();
+    })
+    .then(data => {
+      renderCountry(data[0]); // hàm render đã có từ bài trước
+    })
+    .catch(err => console.error(`💥 ${err.message}`));
+};
+    whereAmI(52.508, 13.381);   // Berlin
+whereAmI(19.037, 72.873);  // Mumbai
+whereAmI(-33.933, 18.474); // Cape Town
+
+    </script>
+</body>
+</html>
