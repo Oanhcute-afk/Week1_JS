@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=
+    , initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="images"></div>
+    <script>
+        const imgContainer = document.querySelector('.images');
+        const createImage = function (imgPath) {
+        return new Promise((resolve, reject) => {
+            const img = document.createElement('img');
+            img.src = imgPath;
+
+            img.addEventListener('load', () => {
+                imgContainer.append(img);
+                resolve(img); // trả về chính img element
+            });
+
+            img.addEventListener('error', () => {
+                reject(new Error('Image not found'));
+            });
+        });
+    };
+     async function loadNPause(){
+            try{
+                let img = await createImage('img/bai2.png');
+                console.log(`image 1 load`);
+                await(5);
+                img.style.display = 'none'
+
+                img = await createImage('img/image.png');
+                console.log(`image 2 load`);
+                await(5);
+                 img.style.display = 'none'
+                
+
+                
+                
+            }catch(err) {
+             console.error(err);
+                
+            }
+        }
+        loadNPause();
+    </script>
+</body>
+</html>
