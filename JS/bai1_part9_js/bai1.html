@@ -10,7 +10,6 @@
         const whereAmI = function (lat, lng) {
   fetch(`https://geocode.xyz/${lat},${lng}?geoit=json`)
     .then(response => {
-      // ⚠️ fetch KHÔNG reject khi lỗi 403
       if (!response.ok)
         throw new Error(`Geocoding failed (${response.status})`);
       return response.json();
@@ -20,7 +19,6 @@
 
       console.log(`You are in ${data.city}, ${data.country}`);
 
-      // gọi API quốc gia
       return fetch(`https://restcountries.com/v3.1/name/${data.country}`);
     })
     .then(response => {
